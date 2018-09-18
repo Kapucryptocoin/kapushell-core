@@ -1,4 +1,4 @@
-# ARK Core Commander
+Kapushell Core 
 
 <p align="center">
     <img src="https://github.com/ArkEcosystem/core-commander/blob/master/banner.png" />
