@@ -4,7 +4,7 @@ Kapushell Core
     <img src="https://github.com/kapucoin/kapushell-core/blob/master/BANNER_2_KAPUSHELL.jpg" />
 </p>
 
-> A shell script to easily setup, configure and maintain [ARK Core](https://github.com/ArkEcosystem/core).
+> A shell script to easily setup, configure and maintain [KAPU Core](https://github.com/ArkEcosystem/core).
 
 ## Installation
 
