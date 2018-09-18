@@ -9,9 +9,9 @@ Kapushell Core
 ## Installation
 
 ```bash
-git clone https://github.com/ArkEcosystem/core-commander
-cd core-commander
-bash commander.sh
+git clone https://github.com/kapucoin/kapushell-core.git
+cd kapushell-core
+bash kapushellcore.sh
 ```
 
 ## Development
