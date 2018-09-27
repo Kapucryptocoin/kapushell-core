@@ -99,10 +99,17 @@ text_reset ()
     echo "${reset}"
 }
 
+bg_orange()
+{
+echo "${bg_yellow}$1${reset}"
+}
+
 # Helpers
 divider ()
 {
-        text_lila "    ==============================================================="
+#printf '\e[48;5;%dm%03d' 3
+#printf "                   "
+        bg_orange "                                                                                "
 }
 
 paragraph ()
