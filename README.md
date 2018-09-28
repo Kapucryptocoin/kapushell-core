@@ -1,7 +1,7 @@
 Kapushell Core 
 
 <p align="center">
-    <img src="https://github.com/arkcoin/kapushell-core/blob/master/BANNER_2_KAPUSHELL.jpg" />
+    <img src="https://github.com/kapucoin/kapushell-core/blob/master/BANNER_2_KAPUSHELL.jpg" />
 </p>
 
 > A shell script to easily setup, configure and maintain [KAPU Core](https://github.com/ArkEcosystem/core).
