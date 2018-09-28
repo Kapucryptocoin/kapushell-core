@@ -7,13 +7,13 @@ setup_environment_file ()
         local envFile="${CORE_DATA}/.env"
         touch "$envFile"
 
-        echo "ARK_LOG_LEVEL=debug" >> "$envFile" 2>&1
+        echo "KAPU_LOG_LEVEL=debug" >> "$envFile" 2>&1
 
-        echo "ARK_DB_HOST=localhost" >> "$envFile" 2>&1
-        echo "ARK_DB_PORT=5432" >> "$envFile" 2>&1
-        echo "ARK_DB_USERNAME=ark" >> "$envFile" 2>&1
-        echo "ARK_DB_PASSWORD=password" >> "$envFile" 2>&1
-        echo "ARK_DB_DATABASE=ark_devnet" >> "$envFile" 2>&1
+        echo "KAPU_DB_HOST=localhost" >> "$envFile" 2>&1
+        echo "KAPU_DB_PORT=5432" >> "$envFile" 2>&1
+        echo "KAPU_DB_USERNAME=ark" >> "$envFile" 2>&1
+        echo "KAPU_DB_PASSWORD=password" >> "$envFile" 2>&1
+        echo "KAPU_DB_DATABASE=ark_devnet" >> "$envFile" 2>&1
     fi
 
     . "${CORE_DATA}/.env"

@@ -52,7 +52,8 @@ menu_main ()
 
     text_white "    $relay    $forger    $ntp    $pgsql    $redis"
 
-    divider
+
+    divider_double
 
     if [[ -d "$CORE_DIR" ]]; then
         text_white "    A. Manage KAPU Core"
@@ -86,7 +87,7 @@ menu_main ()
 
     text_white "    X. Exit"
 
-    divider
+    divider_double
 
     menu_main_parse_args
 }

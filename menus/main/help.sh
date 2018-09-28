@@ -4,28 +4,28 @@ menu_main_help ()
 {
     ascii
 
-    text_yellow "    Install ARK Core (I)"
-    text_white "    starts the ARK core intall process."
+    text_yellow "    Install KAPU Core (I)"
+    text_white "    starts the KAPU core intall process."
     echo
 
-    text_yellow "    Manage ARK Core (A)"
-    text_white "    opens the ARK core options."
+    text_yellow "    Manage KAPU Core (A)"
+    text_white "    opens the KAPU core options."
     echo
 
     text_yellow "    Manage Relay (R)"
-    text_white "    opens the ARK relay node process options."
+    text_white "    opens the KAPU relay node process options."
     echo
 
     text_yellow "    Manage Forger (F)"
-    text_white "    opens the ARK forger node process options."
+    text_white "    opens the KAPU forger node process options."
     echo
 
     text_yellow "    Manage Explorer (E)"
-    text_white "    opens the ARK explorer options."
+    text_white "    opens the KAPU explorer options."
     echo
 
     text_yellow "    Manage Commander (C)"
-    text_white "    opens the ARK commander options."
+    text_white "    opens the KAPU commander options."
     echo
 
     text_yellow "    Miscellaneous (M)"
@@ -45,7 +45,7 @@ menu_main_help ()
     echo
 
     text_yellow "    X — Exit"
-    text_white "    exits ARK Commander"
+    text_white "    exits KAPU Commander"
 
     divider
 

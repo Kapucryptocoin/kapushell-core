@@ -7,7 +7,7 @@ core_configure ()
     local configured=false
 
     if [[ -d "$CORE_CONFIG" ]]; then
-        read -p "We found an ARK Core configuration, do you want to overwrite it? [y/N] : " choice
+        read -p "We found an KAPU Core configuration, do you want to overwrite it? [y/N] : " choice
 
         if [[ "$choice" =~ ^(yes|y|Y) ]]; then
             __core_configure_pre
@@ -37,7 +37,7 @@ core_configure ()
     fi
 
     if [[ "$configured" = true ]]; then
-        read -p "ARK Core has been configured, would you like to start the relay? [Y/n] : " choice
+        read -p "KAPU Core has been configured, would you like to start the relay? [Y/n] : " choice
 
         if [[ -z "$choice" || "$choice" =~ ^(yes|y|Y) ]]; then
             relay_start
@@ -120,34 +120,34 @@ __core_configure_environment ()
 
     touch "$envFile"
 
-    grep -q '^ARK_P2P_HOST' "$envFile" 2>&1 || echo 'ARK_P2P_HOST=0.0.0.0' >> "$envFile" 2>&1
+    grep -q '^KAPU_P2P_HOST' "$envFile" 2>&1 || echo 'KAPU_P2P_HOST=0.0.0.0' >> "$envFile" 2>&1
 
     if [[ "$1" = "testnet" ]]; then
-        grep -q '^ARK_P2P_PORT' "$envFile" 2>&1 || echo 'ARK_P2P_PORT=4000' >> "$envFile" 2>&1
+        grep -q '^KAPU_P2P_PORT' "$envFile" 2>&1 || echo 'KAPU_P2P_PORT=4000' >> "$envFile" 2>&1
     fi
 
     # if [[ "$1" = "mainnet" ]]; then
-    #     echo "ARK_P2P_PORT=4001" >> "$envFile" 2>&1
+    #     echo "KAPU_P2P_PORT=4001" >> "$envFile" 2>&1
     # fi
 
     if [[ "$1" = "devnet" ]]; then
-        grep -q '^ARK_P2P_PORT' "$envFile" 2>&1 || echo 'ARK_P2P_PORT=4002' >> "$envFile" 2>&1
+        grep -q '^KAPU_P2P_PORT' "$envFile" 2>&1 || echo 'KAPU_P2P_PORT=4002' >> "$envFile" 2>&1
     fi
 
-    grep -q '^ARK_API_HOST' "$envFile" 2>&1 || echo 'ARK_API_HOST=0.0.0.0' >> "$envFile" 2>&1
-    grep -q '^ARK_API_PORT' "$envFile" 2>&1 || echo 'ARK_API_PORT=4003' >> "$envFile" 2>&1
+    grep -q '^KAPU_API_HOST' "$envFile" 2>&1 || echo 'KAPU_API_HOST=0.0.0.0' >> "$envFile" 2>&1
+    grep -q '^KAPU_API_PORT' "$envFile" 2>&1 || echo 'KAPU_API_PORT=4003' >> "$envFile" 2>&1
 
-    grep -q '^ARK_WEBHOOKS_HOST' "$envFile" 2>&1 || echo 'ARK_WEBHOOKS_HOST=0.0.0.0' >> "$envFile" 2>&1
-    grep -q '^ARK_WEBHOOKS_PORT' "$envFile" 2>&1 || echo 'ARK_WEBHOOKS_PORT=4004' >> "$envFile" 2>&1
+    grep -q '^KAPU_WEBHOOKS_HOST' "$envFile" 2>&1 || echo 'KAPU_WEBHOOKS_HOST=0.0.0.0' >> "$envFile" 2>&1
+    grep -q '^KAPU_WEBHOOKS_PORT' "$envFile" 2>&1 || echo 'KAPU_WEBHOOKS_PORT=4004' >> "$envFile" 2>&1
 
-    grep -q '^ARK_GRAPHQL_HOST' "$envFile" 2>&1 || echo 'ARK_GRAPHQL_HOST=0.0.0.0' >> "$envFile" 2>&1
-    grep -q '^ARK_GRAPHQL_PORT' "$envFile" 2>&1 || echo 'ARK_GRAPHQL_PORT=4005' >> "$envFile" 2>&1
+    grep -q '^KAPU_GRAPHQL_HOST' "$envFile" 2>&1 || echo 'KAPU_GRAPHQL_HOST=0.0.0.0' >> "$envFile" 2>&1
+    grep -q '^KAPU_GRAPHQL_PORT' "$envFile" 2>&1 || echo 'KAPU_GRAPHQL_PORT=4005' >> "$envFile" 2>&1
 
-    grep -q '^ARK_JSONRPC_HOST' "$envFile" 2>&1 || echo 'ARK_JSONRPC_HOST=0.0.0.0' >> "$envFile" 2>&1
-    grep -q '^ARK_JSONRPC_PORT' "$envFile" 2>&1 || echo 'ARK_JSONRPC_PORT=8080' >> "$envFile" 2>&1
+    grep -q '^KAPU_JSONRPC_HOST' "$envFile" 2>&1 || echo 'KAPU_JSONRPC_HOST=0.0.0.0' >> "$envFile" 2>&1
+    grep -q '^KAPU_JSONRPC_PORT' "$envFile" 2>&1 || echo 'KAPU_JSONRPC_PORT=8080' >> "$envFile" 2>&1
 
-    grep -q '^ARK_REDIS_HOST' "$envFile" 2>&1 || echo 'ARK_REDIS_HOST=localhost' >> "$envFile" 2>&1
-    grep -q '^ARK_REDIS_PORT' "$envFile" 2>&1 || echo 'ARK_REDIS_PORT=6379' >> "$envFile" 2>&1
+    grep -q '^KAPU_REDIS_HOST' "$envFile" 2>&1 || echo 'KAPU_REDIS_HOST=localhost' >> "$envFile" 2>&1
+    grep -q '^KAPU_REDIS_PORT' "$envFile" 2>&1 || echo 'KAPU_REDIS_PORT=6379' >> "$envFile" 2>&1
 
     success "Created Environment configuration!"
 }

@@ -6,9 +6,9 @@ menu_manage_core ()
 
     forger_status
 
-    text_white "    U. Update ARK Core"
-    text_white "    P. Uninstall ARK Core"
-    text_white "    C. Configure ARK Core"
+    text_white "    U. Update KAPU Core"
+    text_white "    P. Uninstall KAPU Core"
+    text_white "    C. Configure KAPU Core"
 
     divider
 

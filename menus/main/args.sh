@@ -4,7 +4,7 @@ menu_main_parse_args ()
 {
     local choice
 
-    read -p "$(text_blue "    Please enter your choice: ")" choice
+    read -p "$(text_byellow "    Please enter your choice: ")" choice
 
     case "$choice" in
         i|I)

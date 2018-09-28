@@ -1,3 +1,4 @@
+ 
 #!/usr/bin/env bash
 
 red=$(tput setaf 1)
@@ -94,6 +95,11 @@ text_bold ()
     echo "${bold}"
 }
 
+text_byellow ()
+{
+    echo "${bold}${yellow}$1${reset}"
+}
+
 text_reset ()
 {
     echo "${reset}"
@@ -105,11 +111,18 @@ echo "${bg_yellow}$1${reset}"
 }
 
 # Helpers
+divider_double ()
+{
+#        bg_orange "                                                                                "
+        text_yellow " ════════════════════════════════════════════════════════════════════════════ "
+
+}
+
 divider ()
 {
-#printf '\e[48;5;%dm%03d' 3
-#printf "                   "
-        bg_orange "                                                                                "
+#        bg_orange "                                                                                "
+	text_yellow " ──────────────────────────────────────────────────────────────────────────── "
+
 }
 
 paragraph ()
