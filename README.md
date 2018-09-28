@@ -22,7 +22,7 @@ cd kapushell-core/.dev/{operating_system}
 vagrant up
 vagrant ssh
 cd /vagrant
-bash commander.sh
+bash kapushellcore.sh
 ```
 
 ## Contributing
