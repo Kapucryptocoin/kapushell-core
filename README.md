@@ -10,15 +10,15 @@ Kapushell Core
 
 ```bash
 git clone https://github.com/arkcoin/kapushell-core.git
-cd arkshell-core
-bash arkshellcore.sh
+cd kapushell-core
+bash kapushellcore.sh
 ```
 
 ## Development
 
 ```sh
-git clone https://github.com/ArkEcosystem/core-commander -b develop
-cd core-commander/.dev/{operating_system}
+git clone https://github.com/kapucoin/kapushell-core -b develop
+cd kapushell-core/.dev/{operating_system}
 vagrant up
 vagrant ssh
 cd /vagrant
