@@ -1,28 +1,28 @@
 Kapushell Core 
 
 <p align="center">
-    <img src="https://github.com/arkcoin/kapushell-core/blob/master/BANNER_2_KAPUSHELL.jpg" />
+    <img src="https://github.com/kapucoin/kapushell-core/blob/master/BANNER_2_KAPUSHELL.jpg" />
 </p>
 
-> A shell script to easily setup, configure and maintain [KAPU Core](https://github.com/ArkEcosystem/core).
+> A shell script to easily setup, configure and maintain [KAPU Core](https://github.com/kapucoin/kapushell-core).
 
 ## Installation
 
 ```bash
 git clone https://github.com/arkcoin/kapushell-core.git
-cd arkshell-core
-bash arkshellcore.sh
+cd kapushell-core
+bash kapushellcore.sh
 ```
 
 ## Development
 
 ```sh
-git clone https://github.com/ArkEcosystem/core-commander -b develop
-cd core-commander/.dev/{operating_system}
+git clone https://github.com/kapucoin/kapushell-core -b develop
+cd kapushell-core/.dev/{operating_system}
 vagrant up
 vagrant ssh
 cd /vagrant
-bash commander.sh
+bash kapushellcore.sh
 ```
 
 ## Contributing
