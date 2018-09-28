@@ -9,7 +9,7 @@ Kapushell Core
 ## Installation
 
 ```bash
-git clone https://github.com/arkcoin/kapushell-core.git
+git clone https://github.com/kapucoin/kapushell-core.git
 cd kapushell-core
 bash kapushellcore.sh
 ```
