@@ -20,19 +20,24 @@ database_destroy ()
 
 database_create ()
 {
-    heading "Creating Database..."
+    heading "0Creating Database..."
 
-    wait_to_continue
+#    wait_to_continue
 
     # needed to avoid "could not connect to database template1" errors
+    heading "Creating Database..."
+
     sudo -u postgres psql -c "CREATE USER $USER WITH PASSWORD 'password' CREATEDB;" | tee -a "$commander_log"
 
     sudo -u postgres psql -c "CREATE USER $KAPU_DB_USERNAME WITH PASSWORD '$KAPU_DB_PASSWORD' CREATEDB;" | tee -a "$commander_log"
+    
+    sudo -u postgres createdb "$KAPU_DB_DATABASE"
+
     sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $KAPU_DB_DATABASE TO $KAPU_DB_USERNAME;" | tee -a "$commander_log"
 
     wait_to_continue
 
-    createdb "$KAPU_DB_DATABASE" | tee -a "$commander_log"
+#    createdb "$KAPU_DB_DATABASE" | tee -a "$commander_log"
 
     success "Created Database!"
 }
