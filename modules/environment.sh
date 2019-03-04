@@ -7,13 +7,13 @@ setup_environment_file ()
         local envFile="${CORE_DATA}/.env"
         touch "$envFile"
 
-        echo "KAPU_LOG_LEVEL=debug" >> "$envFile" 2>&1
+        echo "ARK_LOG_LEVEL=info" >> "$envFile" 2>&1
 
-        echo "KAPU_DB_HOST=localhost" >> "$envFile" 2>&1
-        echo "KAPU_DB_PORT=5432" >> "$envFile" 2>&1
-        echo "KAPU_DB_USERNAME=kapu" >> "$envFile" 2>&1
-        echo "KAPU_DB_PASSWORD=password" >> "$envFile" 2>&1
-        echo "KAPU_DB_DATABASE=kapu_devnet" >> "$envFile" 2>&1
+        echo "ARK_DB_HOST=localhost" >> "$envFile" 2>&1
+        echo "ARK_DB_PORT=5432" >> "$envFile" 2>&1
+        echo "ARK_DB_USERNAME=kapu" >> "$envFile" 2>&1
+        echo "ARK_DB_PASSWORD=password" >> "$envFile" 2>&1
+        echo "ARK_DB_DATABASE=kapu_mainnet" >> "$envFile" 2>&1
     fi
 
     . "${CORE_DATA}/.env"
@@ -39,8 +39,8 @@ setup_environment ()
         echo "CORE_DATA=${HOME}/.kapu" >> "$commander_config" 2>&1
         echo "CORE_CONFIG=${HOME}/.kapu/config" >> "$commander_config" 2>&1
         echo "CORE_TOKEN=kapu" >> "$commander_config" 2>&1
-        echo "CORE_NETWORK=devnet" >> "$commander_config" 2>&1
-        echo "EXPLORER_REPO=https://github.com/ArkEcosystem/explorer" >> "$commander_config" 2>&1
+        echo "CORE_NETWORK=mainnet" >> "$commander_config" 2>&1
+        echo "EXPLORER_REPO=https://github.com/kapucoin/explorer" >> "$commander_config" 2>&1
         echo "EXPLORER_DIR=${HOME}/kapu-explorer" >> "$commander_config" 2>&1
 
         . "$commander_config"

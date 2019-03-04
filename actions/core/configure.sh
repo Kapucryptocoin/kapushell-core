@@ -65,17 +65,16 @@ __core_configure_network ()
 {
     info "Which network would you like to configure?"
 
-    # validNetworks=("mainnet" "devnet" "testnet")
-    validNetworks=("devnet" "testnet")
+    validNetworks=("mainnet" "devnet" "testnet")
 
     select opt in "${validNetworks[@]}"; do
         case "$opt" in
-            # "mainnet")
-            #     __core_configure_core "mainnet"
-            #     __core_configure_commander "mainnet"
-            #     __core_configure_environment "mainnet"
-            #     break
-            # ;;
+            "mainnet")
+                __core_configure_core "mainnet"
+                __core_configure_commander "mainnet"
+                __core_configure_environment "mainnet"
+                break
+            ;;
             "devnet")
                 __core_configure_core "devnet"
                 __core_configure_commander "devnet"
@@ -120,34 +119,34 @@ __core_configure_environment ()
 
     touch "$envFile"
 
-    grep -q '^KAPU_P2P_HOST' "$envFile" 2>&1 || echo 'KAPU_P2P_HOST=0.0.0.0' >> "$envFile" 2>&1
+    grep -q '^ARK_P2P_HOST' "$envFile" 2>&1 || echo 'ARK_P2P_HOST=0.0.0.0' >> "$envFile" 2>&1
 
     if [[ "$1" = "testnet" ]]; then
-        grep -q '^KAPU_P2P_PORT' "$envFile" 2>&1 || echo 'KAPU_P2P_PORT=4000' >> "$envFile" 2>&1
+        grep -q '^ARK_P2P_PORT' "$envFile" 2>&1 || echo 'ARK_P2P_PORT=4000' >> "$envFile" 2>&1
     fi
 
-    # if [[ "$1" = "mainnet" ]]; then
-    #     echo "KAPU_P2P_PORT=4001" >> "$envFile" 2>&1
-    # fi
+    if [[ "$1" = "mainnet" ]]; then
+        echo "ARK_P2P_PORT=9701" >> "$envFile" 2>&1
+    fi
 
     if [[ "$1" = "devnet" ]]; then
-        grep -q '^KAPU_P2P_PORT' "$envFile" 2>&1 || echo 'KAPU_P2P_PORT=4002' >> "$envFile" 2>&1
+        grep -q '^ARK_P2P_PORT' "$envFile" 2>&1 || echo 'ARK_P2P_PORT=4002' >> "$envFile" 2>&1
     fi
 
-    grep -q '^KAPU_API_HOST' "$envFile" 2>&1 || echo 'KAPU_API_HOST=0.0.0.0' >> "$envFile" 2>&1
-    grep -q '^KAPU_API_PORT' "$envFile" 2>&1 || echo 'KAPU_API_PORT=4003' >> "$envFile" 2>&1
+    grep -q '^ARK_API_HOST' "$envFile" 2>&1 || echo 'ARK_API_HOST=0.0.0.0' >> "$envFile" 2>&1
+    grep -q '^ARK_API_PORT' "$envFile" 2>&1 || echo 'ARK_API_PORT=9702' >> "$envFile" 2>&1
 
-    grep -q '^KAPU_WEBHOOKS_HOST' "$envFile" 2>&1 || echo 'KAPU_WEBHOOKS_HOST=0.0.0.0' >> "$envFile" 2>&1
-    grep -q '^KAPU_WEBHOOKS_PORT' "$envFile" 2>&1 || echo 'KAPU_WEBHOOKS_PORT=4004' >> "$envFile" 2>&1
+    grep -q '^ARK_WEBHOOKS_HOST' "$envFile" 2>&1 || echo 'ARK_WEBHOOKS_HOST=0.0.0.0' >> "$envFile" 2>&1
+    grep -q '^ARK_WEBHOOKS_PORT' "$envFile" 2>&1 || echo 'ARK_WEBHOOKS_PORT=9703' >> "$envFile" 2>&1
 
-    grep -q '^KAPU_GRAPHQL_HOST' "$envFile" 2>&1 || echo 'KAPU_GRAPHQL_HOST=0.0.0.0' >> "$envFile" 2>&1
-    grep -q '^KAPU_GRAPHQL_PORT' "$envFile" 2>&1 || echo 'KAPU_GRAPHQL_PORT=4005' >> "$envFile" 2>&1
+    grep -q '^ARK_GRAPHQL_HOST' "$envFile" 2>&1 || echo 'ARK_GRAPHQL_HOST=0.0.0.0' >> "$envFile" 2>&1
+    grep -q '^ARK_GRAPHQL_PORT' "$envFile" 2>&1 || echo 'ARK_GRAPHQL_PORT=9704' >> "$envFile" 2>&1
 
-    grep -q '^KAPU_JSONRPC_HOST' "$envFile" 2>&1 || echo 'KAPU_JSONRPC_HOST=0.0.0.0' >> "$envFile" 2>&1
-    grep -q '^KAPU_JSONRPC_PORT' "$envFile" 2>&1 || echo 'KAPU_JSONRPC_PORT=8080' >> "$envFile" 2>&1
+    grep -q '^ARK_JSONRPC_HOST' "$envFile" 2>&1 || echo 'ARK_JSONRPC_HOST=0.0.0.0' >> "$envFile" 2>&1
+    grep -q '^ARK_JSONRPC_PORT' "$envFile" 2>&1 || echo 'ARK_JSONRPC_PORT=8080' >> "$envFile" 2>&1
 
-    grep -q '^KAPU_REDIS_HOST' "$envFile" 2>&1 || echo 'KAPU_REDIS_HOST=localhost' >> "$envFile" 2>&1
-    grep -q '^KAPU_REDIS_PORT' "$envFile" 2>&1 || echo 'KAPU_REDIS_PORT=6379' >> "$envFile" 2>&1
+    grep -q '^ARK_REDIS_HOST' "$envFile" 2>&1 || echo 'ARK_REDIS_HOST=localhost' >> "$envFile" 2>&1
+    grep -q '^ARK_REDIS_PORT' "$envFile" 2>&1 || echo 'ARK_REDIS_PORT=6379' >> "$envFile" 2>&1
 
     success "Created Environment configuration!"
 }
