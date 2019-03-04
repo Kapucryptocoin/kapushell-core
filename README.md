@@ -9,7 +9,7 @@ Kapushell Core
 ## Installation
 
 ```bash
-git clone https://github.com/kapucoin/kapushell-core.git
+git clone https://github.com/Kapucryptocoin/kapushell-core.git
 cd kapushell-core
 bash kapushellcore.sh
 ```
@@ -17,7 +17,7 @@ bash kapushellcore.sh
 ## Development
 
 ```sh
-git clone https://github.com/kapucoin/kapushell-core -b develop
+git clone https://github.com/Kapucryptocoin/kapushell-core -b develop
 cd kapushell-core/.dev/{operating_system}
 vagrant up
 vagrant ssh
