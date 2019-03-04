@@ -26,4 +26,6 @@ core_uninstall ()
     success "Deleted Configuration!"
 
     success "Uninstalled KAPU Core!"
+
+    core_version
 }

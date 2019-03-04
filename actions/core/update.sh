@@ -38,9 +38,16 @@ core_update ()
 
             heading "Starting Update..."
             git reset --hard | tee -a "$commander_log"
-            git checkout master | tee -a "$commander_log"
+            git checkout "$CORE_BRANCH" | tee -a "$commander_log"
             git pull | tee -a "$commander_log"
+            lerna clean --yes
             lerna bootstrap
+
+            # Make sure the git commit hash is not modified by a local yarn.lock
+            git reset --hard | tee -a "$commander_log"
+
+            check_for_modifications "packages/core/lib/config/${CORE_NETWORK}/plugins.js" "${CORE_CONFIG}/plugins.js"
+            check_for_modifications "packages/crypto/lib/networks/${CORE_TOKEN}/${CORE_NETWORK}.json" "${CORE_CONFIG}/network.json"
 
             if [[ "$relay_on" = "On" ]]; then
                 relay_start
@@ -52,6 +59,8 @@ core_update ()
 
             success "Update OK!"
             STATUS_CORE_UPDATE="No"
+
+            core_version
         fi
     fi
 }

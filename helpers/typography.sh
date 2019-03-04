@@ -1,4 +1,3 @@
- 
 #!/usr/bin/env bash
 
 red=$(tput setaf 1)

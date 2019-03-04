@@ -37,6 +37,12 @@ menu_main_parse_args ()
         ;;
         l|L)
             utils_log
+
+            if [[ $? -eq 130 ]]; then
+                press_to_continue
+            else
+                wait_to_continue
+            fi
         ;;
         h|H)
             menu_main_help

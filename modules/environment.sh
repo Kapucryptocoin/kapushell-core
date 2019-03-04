@@ -2,21 +2,38 @@
 
 setup_environment_file ()
 {
-    if [[ ! -e "${CORE_DATA}/.env" ]]; then
-        mkdir "${HOME}/.kapu"
-        local envFile="${CORE_DATA}/.env"
-        touch "$envFile"
+    local envFile="${CORE_DATA}/.env"
 
-        echo "ARK_LOG_LEVEL=info" >> "$envFile" 2>&1
-
-        echo "ARK_DB_HOST=localhost" >> "$envFile" 2>&1
-        echo "ARK_DB_PORT=5432" >> "$envFile" 2>&1
-        echo "ARK_DB_USERNAME=kapu" >> "$envFile" 2>&1
-        echo "ARK_DB_PASSWORD=password" >> "$envFile" 2>&1
-        echo "ARK_DB_DATABASE=kapu_mainnet" >> "$envFile" 2>&1
+    if [[ ! -e "${envFile}" ]]; then
+        mkdir -p "${HOME}/.kapu"
+        touch "${envFile}"
     fi
 
-    . "${CORE_DATA}/.env"
+    if ! grep -q "ARK_LOG_LEVEL" "${envFile}"; then
+        echo "ARK_LOG_LEVEL=debug" >> "$envFile" 2>&1
+    fi
+
+    if ! grep -q "ARK_DB_HOST" "${envFile}"; then
+        echo "ARK_DB_HOST=localhost" >> "$envFile" 2>&1
+    fi
+
+    if ! grep -q "ARK_DB_PORT" "${envFile}"; then
+        echo "ARK_DB_PORT=5432" >> "$envFile" 2>&1
+    fi
+
+    if ! grep -q "ARK_DB_USERNAME" "${envFile}"; then
+        echo "ARK_DB_USERNAME=${USER}" >> "$envFile" 2>&1
+    fi
+
+    if ! grep -q "ARK_DB_PASSWORD" "${envFile}"; then
+        echo "ARK_DB_PASSWORD=password" >> "$envFile" 2>&1
+    fi
+
+    if ! grep -q "ARK_DB_DATABASE" "${envFile}"; then
+        echo "ARK_DB_DATABASE=kapu_${CORE_NETWORK}" >> "$envFile" 2>&1
+    fi
+
+    . "${envFile}"
 }
 
 setup_environment ()
@@ -34,18 +51,19 @@ setup_environment ()
         # create ~/.commander
         touch "$commander_config"
 
-        echo "CORE_REPO=https://github.com/kapucoin/core" >> "$commander_config" 2>&1
+        echo "CORE_REPO=https://github.com/Kapucryptocoin/core" >> "$commander_config" 2>&1
+        echo "CORE_BRANCH=master" >> "$commander_config" 2>&1
         echo "CORE_DIR=${HOME}/kapu-core" >> "$commander_config" 2>&1
         echo "CORE_DATA=${HOME}/.kapu" >> "$commander_config" 2>&1
         echo "CORE_CONFIG=${HOME}/.kapu/config" >> "$commander_config" 2>&1
         echo "CORE_TOKEN=kapu" >> "$commander_config" 2>&1
         echo "CORE_NETWORK=mainnet" >> "$commander_config" 2>&1
-        echo "EXPLORER_REPO=https://github.com/kapucoin/explorer" >> "$commander_config" 2>&1
+        echo "EXPLORER_REPO=https://github.com/Kapucryptocoin/kapu-explorer" >> "$commander_config" 2>&1
         echo "EXPLORER_DIR=${HOME}/kapu-explorer" >> "$commander_config" 2>&1
 
         . "$commander_config"
 
-        # create ~/.ark/.env
+        # create ~/.kapu/.env
         setup_environment_file
         success "All system dependencies have been installed!"
 
@@ -54,6 +72,42 @@ setup_environment ()
     fi
 
     if [[ -e "$commander_config" ]]; then
+        if ! grep -q "CORE_REPO" "${commander_config}"; then
+            echo "CORE_REPO=https://github.com/Kapucryptocoin/core" >> "$commander_config" 2>&1
+        fi
+
+        if ! grep -q "CORE_BRANCH" "${commander_config}"; then
+            echo "CORE_BRANCH=master" >> "$commander_config" 2>&1
+        fi
+
+        if ! grep -q "CORE_DIR" "${commander_config}"; then
+            echo "CORE_DIR=${HOME}/kapu-core" >> "$commander_config" 2>&1
+        fi
+
+        if ! grep -q "CORE_DATA" "${commander_config}"; then
+            echo "CORE_DATA=${HOME}/.kapu" >> "$commander_config" 2>&1
+        fi
+
+        if ! grep -q "CORE_CONFIG" "${commander_config}"; then
+            echo "CORE_CONFIG=${HOME}/.kapu/config" >> "$commander_config" 2>&1
+        fi
+
+        if ! grep -q "CORE_TOKEN" "${commander_config}"; then
+            echo "CORE_TOKEN=kapu" >> "$commander_config" 2>&1
+        fi
+
+        if ! grep -q "CORE_NETWORK" "${commander_config}"; then
+            echo "CORE_NETWORK=mainnet" >> "$commander_config" 2>&1
+        fi
+
+        if ! grep -q "EXPLORER_REPO" "${commander_config}"; then
+            echo "EXPLORER_REPO=https://github.com/RipaEx/ripa-explorer" >> "$commander_config" 2>&1
+        fi
+
+        if ! grep -q "EXPLORER_DIR" "${commander_config}"; then
+            echo "EXPLORER_DIR=${HOME}/kapu-explorer" >> "$commander_config" 2>&1
+        fi
+
         . "$commander_config"
 
         setup_environment_file

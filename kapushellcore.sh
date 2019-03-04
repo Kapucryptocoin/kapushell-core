@@ -7,6 +7,7 @@
 commander=$(basename "$0")
 commander_dir="$(cd "$(dirname "$0")" && pwd)"
 commander_log="${commander_dir}/logs/commander.log"
+commander_ecosystem="${commander_dir}/ecosystem.config.js"
 commander_config="${HOME}/.commander"
 
 # -------------------------
@@ -29,7 +30,6 @@ commander_config="${HOME}/.commander"
 . "${commander_dir}/scripts/ntp.sh"
 . "${commander_dir}/scripts/pm2.sh"
 . "${commander_dir}/scripts/postgresql.sh"
-. "${commander_dir}/scripts/redis.sh"
 . "${commander_dir}/scripts/yarn.sh"
 
 # -------------------------
@@ -44,6 +44,7 @@ commander_config="${HOME}/.commander"
 
 . "${commander_dir}/modules/bootstrap.sh"
 . "${commander_dir}/modules/environment.sh"
+. "${commander_dir}/modules/modifications.sh"
 . "${commander_dir}/modules/versions.sh"
 . "${commander_dir}/modules/state.sh"
 . "${commander_dir}/modules/update.sh"
@@ -116,6 +117,8 @@ main ()
 
     if [[ -d "$EXPLORER_DIR" ]]; then
         explorer_update
+    else
+        STATUS_EXPLORER_UPDATE="n/a"
     fi
 
     while true; do

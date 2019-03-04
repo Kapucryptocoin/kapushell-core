@@ -74,31 +74,16 @@ core_configure_hosts_and_ports ()
     read -p "Would you like to configure the JSON-RPC API? [y/N] : " choice
 
     if [[ "$choice" =~ ^(yes|y|Y) ]]; then
-        read -p "Enter the JSON-RPC host, or press ENTER for the default [${ARK_JSONRPC_HOST}]: " inputHost
-        read -p "Enter the JSON-RPC port, or press ENTER for the default [${ARK_JSONRPC_PORT}]: " inputPort
+        read -p "Enter the JSON-RPC host, or press ENTER for the default [${ARK_JSON_RPC_HOST}]: " inputHost
+        read -p "Enter the JSON-RPC port, or press ENTER for the default [${ARK_JSON_RPC_PORT}]: " inputPort
 
         if [[ ! -z "$inputHost" ]]; then
-            sed -i -e "s/ARK_JSONRPC_HOST=$ARK_JSONRPC_HOST/ARK_JSONRPC_HOST=$inputHost/g" "$envFile"
+            sed -i -e "s/ARK_JSON_RPC_HOST=$ARK_JSON_RPC_HOST/ARK_JSON_RPC_HOST=$inputHost/g" "$envFile"
         fi
 
         if [[ ! -z "$inputPort" ]]; then
-            sed -i -e "s/ARK_JSONRPC_PORT=$ARK_JSONRPC_PORT/ARK_JSONRPC_PORT=$inputPort/g" "$envFile"
+            sed -i -e "s/ARK_JSON_RPC_PORT=$ARK_JSON_RPC_PORT/ARK_JSON_RPC_PORT=$inputPort/g" "$envFile"
         fi
     fi
 
-    # @arkecosystem/core-*
-    read -p "Would you like to configure redis? [y/N] : " choice
-
-    if [[ "$choice" =~ ^(yes|y|Y) ]]; then
-        read -p "Enter the Redis host, or press ENTER for the default [${ARK_REDIS_HOST}]: " inputHost
-        read -p "Enter the Redis port, or press ENTER for the default [${ARK_REDIS_PORT}]: " inputPort
-
-        if [[ ! -z "$inputHost" ]]; then
-            sed -i -e "s/ARK_REDIS_HOST=$ARK_REDIS_HOST/ARK_REDIS_HOST=$inputHost/g" "$envFile"
-        fi
-
-        if [[ ! -z "$inputPort" ]]; then
-            sed -i -e "s/ARK_REDIS_PORT=$ARK_REDIS_PORT/ARK_REDIS_PORT=$inputPort/g" "$envFile"
-        fi
-    fi
 }

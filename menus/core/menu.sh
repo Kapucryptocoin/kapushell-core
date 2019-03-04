@@ -5,6 +5,7 @@ menu_manage_core ()
     ascii
 
     forger_status
+    relay_status
 
     text_white "    U. Update KAPU Core"
     text_white "    P. Uninstall KAPU Core"
@@ -15,6 +16,7 @@ menu_manage_core ()
     text_white "    L. Configure Log Level"
     text_white "    D. Configure Database"
     text_white "    A. Configure Hosts & Ports"
+    text_white "    R. Reset Configuration"
 
     divider
 

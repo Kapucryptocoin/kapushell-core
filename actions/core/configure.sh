@@ -1,5 +1,27 @@
 #!/usr/bin/env bash
 
+core_configure_reset ()
+{
+    read -p "Are you sure you want to reset the configuration? [y/N] : " choice
+
+    if [[ "$choice" =~ ^(yes|y|Y) ]]; then
+        info "Resetting configuration..."
+
+        if [[ ! -d "$CORE_DATA" ]]; then
+            mkdir "$CORE_DATA"
+        fi
+
+        rm -rf "$CORE_CONFIG"
+
+        cp -r "${CORE_DIR}/packages/core/lib/config/${CORE_NETWORK}" "$CORE_CONFIG"
+        cp "${CORE_DIR}/packages/crypto/lib/networks/${CORE_TOKEN}/${CORE_NETWORK}.json" "$CORE_CONFIG/network.json"
+
+        info "Reset configuration!"
+    else
+        warning "Skipping configuration reset..."
+    fi
+}
+
 core_configure ()
 {
     ascii
@@ -18,6 +40,8 @@ core_configure ()
 
             core_configure_database
 
+            core_configure_log_level
+
             __core_configure_post
 
             configured=true
@@ -30,6 +54,8 @@ core_configure ()
         __core_configure_network
 
         core_configure_database
+
+        core_configure_log_level
 
         __core_configure_post
 
@@ -59,10 +85,18 @@ __core_configure_pre ()
 __core_configure_post ()
 {
     database_create
+
+    lerna clean --yes
+    lerna bootstrap | tee -a "$commander_log"
+
+    # Make sure the git commit hash is not modified by a local yarn.lock
+    git reset --hard | tee -a "$commander_log"
 }
 
 __core_configure_network ()
 {
+    ascii
+
     info "Which network would you like to configure?"
 
     validNetworks=("mainnet" "devnet" "testnet")
@@ -70,18 +104,21 @@ __core_configure_network ()
     select opt in "${validNetworks[@]}"; do
         case "$opt" in
             "mainnet")
+                __core_configure_branch "master"
                 __core_configure_core "mainnet"
                 __core_configure_commander "mainnet"
                 __core_configure_environment "mainnet"
                 break
             ;;
             "devnet")
+                __core_configure_branch "master"
                 __core_configure_core "devnet"
                 __core_configure_commander "devnet"
                 __core_configure_environment "devnet"
                 break
             ;;
             "testnet")
+                __core_configure_branch "develop"
                 __core_configure_core "testnet"
                 __core_configure_commander "testnet"
                 __core_configure_environment "testnet"
@@ -142,11 +179,23 @@ __core_configure_environment ()
     grep -q '^ARK_GRAPHQL_HOST' "$envFile" 2>&1 || echo 'ARK_GRAPHQL_HOST=0.0.0.0' >> "$envFile" 2>&1
     grep -q '^ARK_GRAPHQL_PORT' "$envFile" 2>&1 || echo 'ARK_GRAPHQL_PORT=9704' >> "$envFile" 2>&1
 
-    grep -q '^ARK_JSONRPC_HOST' "$envFile" 2>&1 || echo 'ARK_JSONRPC_HOST=0.0.0.0' >> "$envFile" 2>&1
-    grep -q '^ARK_JSONRPC_PORT' "$envFile" 2>&1 || echo 'ARK_JSONRPC_PORT=8080' >> "$envFile" 2>&1
-
-    grep -q '^ARK_REDIS_HOST' "$envFile" 2>&1 || echo 'ARK_REDIS_HOST=localhost' >> "$envFile" 2>&1
-    grep -q '^ARK_REDIS_PORT' "$envFile" 2>&1 || echo 'ARK_REDIS_PORT=6379' >> "$envFile" 2>&1
+    grep -q '^ARK_JSON_RPC_HOST' "$envFile" 2>&1 || echo 'ARK_JSON_RPC_HOST=0.0.0.0' >> "$envFile" 2>&1
+    grep -q '^ARK_JSON_RPC_PORT' "$envFile" 2>&1 || echo 'ARK_JSON_RPC_PORT=8080' >> "$envFile" 2>&1
 
     success "Created Environment configuration!"
+}
+
+__core_configure_branch ()
+{
+    heading "Changing git branch..."
+
+    sed -i -e "s/CORE_BRANCH=$CORE_BRANCH/CORE_BRANCH=$1/g" "$commander_config"
+    . "${CORE_DATA}/.env"
+
+    cd "$CORE_DIR"
+    git reset --hard | tee -a "$commander_log"
+    git pull | tee -a "$commander_log"
+    git checkout "$1" | tee -a "$commander_log"
+
+    success "Changed git branch!"
 }

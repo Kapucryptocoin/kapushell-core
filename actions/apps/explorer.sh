@@ -47,6 +47,8 @@ explorer_uninstall ()
 
     heading "Uninstalling KAPU Explorer..."
 
+    cd "$commander_dir"
+
     sudo rm -rf "$EXPLORER_DIR"
 
     success "Uninstalled KAPU Explorer!"
@@ -94,7 +96,7 @@ explorer_start ()
 
     heading "Starting Explorer..."
 
-    EXPLORER_HOST="0.0.0.0" EXPLORER_PORT=4200 pm2 start "$EXPLORER_DIR/express-server.js" --name ark-explorer >> "$commander_log" 2>&1
+    pm2 start $commander_ecosystem --only ark-explorer >> "$commander_log" 2>&1
 
     success "Started Explorer!"
 }
@@ -105,7 +107,7 @@ explorer_restart ()
 
     heading "Restarting Explorer..."
 
-    pm2 restart ark-explorer >> "$commander_log" 2>&1
+    pm2 restart $commander_ecosystem --only ark-explorer >> "$commander_log" 2>&1
 
     success "Restarted Explorer!"
 }
@@ -116,7 +118,7 @@ explorer_stop ()
 
     heading "Stopping Explorer..."
 
-    pm2 stop ark-explorer >> "$commander_log" 2>&1
+    pm2 stop $commander_ecosystem --only ark-explorer >> "$commander_log" 2>&1
 
     success "Stopped Explorer!"
 }
@@ -132,7 +134,7 @@ explorer_logs ()
 
 explorer_status ()
 {
-    local status=$(pm2status "ark-explorer" | awk '{print $10}')
+    local status=$(pm2status "ark-explorer" | awk '{print $13}')
 
     if [[ "$status" == "online" ]]; then
         STATUS_EXPLORER="On"

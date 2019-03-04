@@ -24,7 +24,7 @@ install_base_dependencies ()
     heading "Installing system dependencies..."
 
     sudo apt-get update >> "$commander_log" 2>&1
-    sudo apt-get install -y git curl | tee -a "$commander_log"
+    sudo apt-get install -y git curl apt-transport-https update-notifier | tee -a "$commander_log"
 
     nodejs_install
 
@@ -54,7 +54,6 @@ install_program_dependencies ()
         success "Program dependencies Installed!"
     fi
 
-    redis_install
     pgsql_install
     ntp_install
 
@@ -82,6 +81,10 @@ install_nodejs_dependencies ()
         sh -c "sudo npm install -g $TO_INSTALL" | tee -a "$commander_log"
 
         success "Installed node.js dependencies!"
+    fi
+
+    if [[ ! -d "${commander_dir}/node_modules/dotenv" ]]; then
+      sh -c "npm install dotenv"
     fi
 
     pm2_install
